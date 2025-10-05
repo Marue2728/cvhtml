@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificados y Diplomas - Mario Sandoval</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            padding: 12px 25px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .section-title {
+            color: white;
+            font-size: 2em;
+            margin: 40px 0 25px 0;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .gallery-item {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            animation: scaleIn 0.5s ease-out backwards;
+        }
+
+        .gallery-item:nth-child(1) { animation-delay: 0.1s; }
+        .gallery-item:nth-child(2) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(3) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+
+        .gallery-item-info {
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+        }
+
+        .gallery-item-info h3 {
+            color: #667eea;
+            font-size: 1.2em;
+            margin-bottom: 8px;
+        }
+
+        .gallery-item-info p {
+            color: #764ba2;
+            font-size: 0.95em;
+        }
+
+        /* Modal para ver imagen en grande */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .modal.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            max-width: 95%;
+            max-height: 95vh;
+            object-fit: contain;
+            animation: zoomIn 0.3s ease;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(102, 126, 234, 0.5);
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 30px;
+            right: 50px;
+            color: white;
+            font-size: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 1001;
+        }
+
+        .close-modal:hover {
+            color: #f093fb;
+            transform: rotate(90deg);
+        }
+
+        .modal-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            font-size: 40px;
+            padding: 20px 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-nav:hover {
+            background: rgba(102, 126, 234, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .modal-prev {
+            left: 30px;
+        }
+
+        .modal-next {
+            right: 30px;
+        }
+
+        .modal-info {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .close-modal {
+                top: 15px;
+                right: 20px;
+                font-size: 35px;
+            }
+
+            .modal-nav {
+                font-size: 30px;
+                padding: 15px 20px;
+            }
+
+            .modal-prev {
+                left: 10px;
+            }
+
+            .modal-next {
+                right: 10px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏆 Certificados y Diplomas</h1>
+            <p>Mario Eliseo Sandoval Platero</p>
+        </div>
+
+        <a href="index.html" class="back-btn">
+            ← Volver al CV
+        </a>
+
+        <h2 class="section-title">📜 Certificados</h2>
+        <div class="gallery" id="certificados-gallery">
+            <div class="gallery-item" data-index="0">
+                <img src="images/certificado1.jpg" alt="Certificado 1">
+                <div class="gallery-item-info">
+                    <h3>Técnico en Informática</h3>
+                    <p>Fundación Carlos Slim - Ofimática</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-index="1">
+                <img src="images/certificado2.jpg" alt="Certificado 2">
+                <div class="gallery-item-info">
+                    <h3>Técnico en Cómputo en la Nube</h3>
+                    <p>Fundación Carlos Slim</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-index="2">
+                <img src="images/certificado3.jpg" alt="Certificado 3">
+                <div class="gallery-item-info">
+                    <h3>Especialidad en Tratamiento de Datos</h3>
+                    <p>Fundación Carlos Slim</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-index="3">
+                <img src="images/certificado4.jpg" alt="Certificado 4">
+                <div class="gallery-item-info">
+                    <h3>Diseño Gráfico</h3>
+                    <p>Creati</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title">🎓 Diplomas</h2>
+        <div class="gallery" id="diplomas-gallery">
+            <div class="gallery-item" data-index="4">
+                <img src="images/diploma1.jpg" alt="Diploma 1">
+                <div class="gallery-item-info">
+                    <h3>Estudiante Destacado</h3>
+                    <p>U.M.A. - Contenidos Multimedia</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-index="5">
+                <img src="images/diploma2.jpg" alt="Diploma 2">
+                <div class="gallery-item-info">
+                    <h3>Bachillerato General</h3>
+                    <p>Colegio La Esperanza</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para vista ampliada -->
+    <div class="modal" id="imageModal">
+        <span class="close-modal" id="closeModal">&times;</span>
+        <button class="modal-nav modal-prev" id="prevBtn">‹</button>
+        <img class="modal-content" id="modalImage" alt="Certificado ampliado">
+        <button class="modal-nav modal-next" id="nextBtn">›</button>
+        <div class="modal-info" id="modalInfo"></div>
+    </div>
+
+    <script>
+        const galleryItems = document.querySelectorAll('.gallery-item');
+        const modal = document.getElementById('imageModal');
+        const modalImg = document.getElementById('modalImage');
+        const modalInfo = document.getElementById('modalInfo');
+        const closeBtn = document.getElementById('closeModal');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        
+        let currentIndex = 0;
+        const images = [];
+        const infos = [];
+
+        // Recopilar todas las imágenes e información
+        galleryItems.forEach(item => {
+            const img = item.querySelector('img');
+            const title = item.querySelector('h3').textContent;
+            const desc = item.querySelector('p').textContent;
+            
+            images.push(img.src);
+            infos.push({ title, desc });
+        });
+
+        // Abrir modal al hacer clic en cualquier imagen
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                currentIndex = parseInt(item.dataset.index);
+                openModal();
+            });
+        });
+
+        function openModal() {
+            modal.classList.add('active');
+            updateModalContent();
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function updateModalContent() {
+            modalImg.src = images[currentIndex];
+            modalInfo.innerHTML = `
+                <strong>${infos[currentIndex].title}</strong><br>
+                ${infos[currentIndex].desc}
+            `;
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            updateModalContent();
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % images.length;
+            updateModalContent();
+        }
+
+        // Event listeners
+        closeBtn.addEventListener('click', closeModal);
+        prevBtn.addEventListener('click', showPrev);
+        nextBtn.addEventListener('click', showNext);
+
+        // Cerrar modal al hacer clic fuera de la imagen
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+
+        // Navegación con teclado
+        document.addEventListener('keydown', (e) => {
+            if (!modal.classList.contains('active')) return;
+            
+            if (e.key === 'Escape') closeModal();
+            if (e.key === 'ArrowLeft') showPrev();
+            if (e.key === 'ArrowRight') showNext();
+        });
+
+        // Animación de entrada para los items
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0) scale(1)';
+                }
+            });
+        }, observerOptions);
+
+        galleryItems.forEach(item => {
+            observer.observe(item);
+        });
+    </script>
+</body>
+</html>

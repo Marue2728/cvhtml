@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CV - Mario Eliseo Sandoval Platero</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .photo-container {
+            width: 150px;
+            height: 200px;
+            border-radius: 15px;
+            overflow: hidden;
+            border: 4px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-container:hover {
+            transform: scale(1.05) rotate(2deg);
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .header-info {
+            text-align: center;
+        }
+
+        .header-info h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header-info .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .qr-container {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 15px;
+            padding: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .qr-container:hover {
+            transform: scale(1.05);
+        }
+
+        .qr-container img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+
+        .qr-container p {
+            color: #667eea;
+            font-size: 0.7em;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+            transition: transform 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .certificates-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: #667eea;
+            padding: 15px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        .certificates-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+
+        .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s ease;
+            animation: slideIn 0.5s ease-out backwards;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        .section:nth-child(6) { animation-delay: 0.6s; }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .section.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .section h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f093fb;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section h2::before {
+            content: '●';
+            color: #764ba2;
+        }
+
+        .experience-item, .education-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .experience-item:hover, .education-item:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+            transform: translateX(5px);
+        }
+
+        .experience-item h3, .education-item h3 {
+            color: #764ba2;
+            font-size: 1.1em;
+            margin-bottom: 5px;
+        }
+
+        .date {
+            color: #667eea;
+            font-size: 0.9em;
+            font-style: italic;
+            margin-bottom: 10px;
+        }
+
+        .experience-item ul, .education-item ul {
+            margin-left: 20px;
+        }
+
+        .experience-item li, .education-item li {
+            margin-bottom: 8px;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+
+        .skill-item {
+            background: white;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .skill-item:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .languages-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .language-badge {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .language-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .references-grid {
+            display: grid;
+            gap: 15px;
+        }
+
+        .reference-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .reference-item:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+            transform: translateX(5px);
+        }
+
+        .reference-item h3 {
+            color: #764ba2;
+            margin-bottom: 5px;
+        }
+
+        .reference-item p {
+            color: #667eea;
+            font-size: 0.95em;
+        }
+
+        .profile-section {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+            padding: 20px;
+            border-radius: 15px;
+            line-height: 1.8;
+            color: #555;
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .project-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+        }
+
+        @media (max-width: 1024px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .header-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+                justify-items: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .header {
+                padding: 30px 20px;
+            }
+
+            .header-info h1 {
+                font-size: 1.8em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .contact-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header-info h1 {
+                font-size: 1.5em;
+            }
+
+            .header-info .subtitle {
+                font-size: 1em;
+            }
+
+            .photo-container {
+                width: 120px;
+                height: 160px;
+            }
+
+            .qr-container {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <div class="photo-container">
+                    <img src="images/foto-perfil.jpg" alt="Mario Sandoval">
+                </div>
+                <div class="header-info">
+                    <h1>Mario Eliseo Sandoval Platero</h1>
+                    <div class="subtitle">Profesional en Informática | Tratamiento de datos| Diseñador Gráfico</div>
+                    <div class="contact-info">
+                        <div class="contact-item">📍 Santa Ana, El Salvador</div>
+                        <div class="contact-item">📱 6003-5661</div>
+                        <div class="contact-item">✉️ sandovalplateromarioeliseo@gmail.com</div>
+                    </div>
+                    <a href="certificados.html" class="certificates-btn">
+                        🏆 Ver Certificados y Diplomas
+                    </a>
+                </div>
+                <div class="qr-container">
+                    <img src="images/qr-code.png" alt="QR Code">
+                    <p>Proyectos</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section full-width">
+                <h2>Perfil Profesional</h2>
+                <div class="profile-section">
+                    <p><strong>Fecha de nacimiento:</strong> 18 de Febrero de 2001</p>
+                    <p style="margin-top: 15px;">Profesional en informática y en cómputo en la nube con especialidad en tratamiento de datos y certificado en diseño gráfico. Experiencia en soporte técnico y en proyectos de soluciones tecnológicas y multimedia con identidad visual.</p>
+                </div>
+            </div>
+
+            <div class="section full-width">
+                <h2>Experiencia Laboral</h2>
+                <div class="experience-item">
+                    <h3>Crece Centroamérica S.A. de C.V.</h3>
+                    <div class="date">Julio 2024 – Diciembre 2024</div>
+                    <ul>
+                        <li>Atención y asesoría tecnológica a clientes</li>
+                        <li>Manejo de sistemas internos para gestión de ventas</li>
+                        <li>Cumplimiento de metas y trabajo en campo</li>
+                    </ul>
+                </div>
+                <div class="experience-item">
+                    <h3>Proyectos para Pequeños Negocios</h3>
+                    <div class="date">Enero 2025 – Septiembre 2025</div>
+                    <ul>
+                        <li>Desarrollo de sistemas de facturación e inventarios</li>
+                        <li>Implementación de chatbots y soluciones ligeras en la nube</li>
+                        <li>Creación de contenido multimedia y diseño de identidad visual</li>
+                    </ul>
+                    <a href="https://vermillion-brioche-98436e.netlify.app/" target="_blank" class="project-link">🚀 Ver Proyectos Destacados</a>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Habilidades</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Trabajo en equipo</div>
+                    <div class="skill-item">Creatividad</div>
+                    <div class="skill-item">Ventas</div>
+                    <div class="skill-item">Organización</div>
+                    <div class="skill-item">Responsabilidad</div>
+                    <div class="skill-item">Capacidad Analítica</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Software</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Linux</div>
+                    <div class="skill-item">Windows</div>
+                    <div class="skill-item">Gimp</div>
+                    <div class="skill-item">Bizagi</div>
+                    <div class="skill-item">Virtual Box</div>
+                    <div class="skill-item">Photoshop</div>
+                    <div class="skill-item">Blender</div>
+                    <div class="skill-item">Audacity</div>
+                    <div class="skill-item">Ollama IA</div>
+                    <div class="skill-item">Pack Office</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Lenguajes de Programación</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Python</div>
+                    <div class="skill-item">C#</div>
+                    <div class="skill-item">SQL</div>
+                    <div class="skill-item">HTML</div>
+                    <div class="skill-item">JavaScript</div>
+                    <div class="skill-item">CSS</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Frameworks</h2>
+                <div class="skills-grid">
+                    <div class="skill-item">Angular</div>
+                    <div class="skill-item">Django</div>
+                    <div class="skill-item">Bottle</div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2>Idiomas</h2>
+                <div class="languages-list">
+                    <div class="language-badge">Español - Nativo</div>
+                    <div class="language-badge">Inglés - Básico/Intermedio</div>
+                </div>
+            </div>
+
+            <div class="section full-width">
+                <h2>Formación Académica</h2>
+                <div class="education-item">
+                    <h3>Colegio La Esperanza</h3>
+                    <div class="date">Bachillerato General</div>
+                </div>
+                <div class="education-item">
+                    <h3>Fundación Carlos Slim</h3>
+                    <ul>
+                        <li>Certificado: Técnico en Informática (Ofimática)</li>
+                        <li>Certificado: Técnico en Cómputo en la Nube</li>
+                        <li>Certificado: Especialidad en Tratamiento de Datos</li>
+                    </ul>
+                </div>
+                <div class="education-item">
+                    <h3>Universidad Modular Abierta (U.M.A.) Santa Ana</h3>
+                    <div class="date">Tercer año - Licenciatura en Informática (en pausa)</div>
+                    <ul>
+                        <li>Diploma: Estudiante destacado en cátedra de contenidos multimedia</li>
+                    </ul>
+                </div>
+                <div class="education-item">
+                    <h3>Creati</h3>
+                    <ul>
+                        <li>Certificado: Diseño Gráfico</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section full-width">
+                <h2>Referencias</h2>
+                <div class="references-grid">
+                    <div class="reference-item">
+                        <h3>María Rodríguez</h3>
+                        <p>Supervisora en Crece</p>
+                        <p>📱 7812-5391</p>
+                    </div>
+                    <div class="reference-item">
+                        <h3>José Hernández</h3>
+                        <p>Sistema de ventas y facturación</p>
+                        <p>📱 7267-4479</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const sections = document.querySelectorAll('.section');
+        
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        sections.forEach(section => {
+            observer.observe(section);
+        });
+
+        const skillItems = document.querySelectorAll('.skill-item');
+        skillItems.forEach(item => {
+            item.addEventListener('click', () => {
+                item.style.animation = 'pulse 0.5s ease';
+                setTimeout(() => {
+                    item.style.animation = '';
+                }, 500);
+            });
+        });
+    </script>
+</body>
+</html>
