@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CV - Mario Eliseo Sandoval Platero</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,36 +12,77 @@
             box-sizing: border-box;
         }
 
+        :root {
+            --primary: #8A2BE2;
+            --secondary: #4B0082;
+            --accent: #00BFFF;
+            --dark: #1A0033;
+            --light: #E6E6FA;
+            --glow: #BA55D3;
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, var(--dark) 0%, var(--secondary) 50%, var(--primary) 100%);
             min-height: 100vh;
             padding: 20px;
+            color: var(--light);
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 80%, rgba(138, 43, 226, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(0, 191, 255, 0.1) 0%, transparent 50%);
+            z-index: -1;
+            animation: backgroundShift 15s ease-in-out infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% {
+                transform: scale(1) rotate(0deg);
+            }
+            100% {
+                transform: scale(1.1) rotate(1deg);
+            }
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            background: white;
-            border-radius: 20px;
+            background: rgba(26, 0, 51, 0.7);
+            border-radius: 25px;
             overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 0.8s ease-in;
+            box-shadow: 
+                0 0 30px rgba(138, 43, 226, 0.5),
+                inset 0 0 30px rgba(0, 191, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            animation: containerGlow 4s ease-in-out infinite alternate;
         }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
+        @keyframes containerGlow {
+            0% {
+                box-shadow: 
+                    0 0 30px rgba(138, 43, 226, 0.5),
+                    inset 0 0 30px rgba(0, 191, 255, 0.1);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            100% {
+                box-shadow: 
+                    0 0 40px rgba(138, 43, 226, 0.7),
+                    inset 0 0 40px rgba(0, 191, 255, 0.2);
             }
         }
 
         .header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 50%, var(--accent) 100%);
             color: white;
             padding: 40px;
             position: relative;
@@ -55,12 +97,28 @@
             width: 200%;
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 4s ease-in-out infinite;
+            animation: pulse 6s ease-in-out infinite;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            animation: shimmer 3s ease-in-out infinite;
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.8; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
         }
 
         .header-content {
@@ -77,13 +135,32 @@
             height: 200px;
             border-radius: 15px;
             overflow: hidden;
-            border: 4px solid rgba(255,255,255,0.3);
+            border: 3px solid rgba(255,255,255,0.3);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+
+        .photo-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(0, 191, 255, 0.3));
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 1;
         }
 
         .photo-container:hover {
             transform: scale(1.05) rotate(2deg);
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.7);
+        }
+
+        .photo-container:hover::before {
+            opacity: 1;
         }
 
         .photo-container img {
@@ -100,30 +177,45 @@
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            background: linear-gradient(90deg, #fff, var(--accent), #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: textShine 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textShine {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
         }
 
         .header-info .subtitle {
             font-size: 1.2em;
             opacity: 0.9;
             margin-bottom: 20px;
+            color: #E6E6FA;
         }
 
         .qr-container {
             width: 120px;
             height: 120px;
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
             padding: 10px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            transition: transform 0.3s ease;
+            transition: all 0.5s ease;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         .qr-container:hover {
-            transform: scale(1.05);
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 15px 40px rgba(138, 43, 226, 0.7);
         }
 
         .qr-container img {
@@ -133,7 +225,7 @@
         }
 
         .qr-container p {
-            color: #667eea;
+            color: var(--accent);
             font-size: 0.7em;
             margin-top: 5px;
             font-weight: bold;
@@ -152,34 +244,58 @@
             align-items: center;
             gap: 8px;
             font-size: 0.95em;
-            transition: transform 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 8px 15px;
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(5px);
         }
 
         .contact-item:hover {
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.5);
         }
 
         .certificates-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: white;
-            color: #667eea;
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
             padding: 15px 30px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: bold;
             font-size: 1.1em;
-            transition: all 0.3s ease;
+            transition: all 0.5s ease;
             margin-top: 20px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .certificates-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .certificates-btn:hover::before {
+            left: 100%;
         }
 
         .certificates-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
         }
 
         .content {
@@ -190,22 +306,49 @@
         }
 
         .section {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
-            padding: 25px;
-            border-radius: 15px;
-            border-left: 4px solid #667eea;
-            transition: all 0.3s ease;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.2) 0%, rgba(75, 0, 130, 0.3) 100%);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             animation: slideIn 0.5s ease-out backwards;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(0, 191, 255, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .section:hover::before {
+            opacity: 1;
+        }
+
+        .section:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 
+                0 20px 40px rgba(138, 43, 226, 0.4),
+                inset 0 0 30px rgba(0, 191, 255, 0.1);
         }
 
         @keyframes slideIn {
             from {
                 opacity: 0;
-                transform: translateX(-20px);
+                transform: translateY(30px);
             }
             to {
                 opacity: 1;
-                transform: translateX(0);
+                transform: translateY(0);
             }
         }
 
@@ -216,52 +359,54 @@
         .section:nth-child(5) { animation-delay: 0.5s; }
         .section:nth-child(6) { animation-delay: 0.6s; }
 
-        .section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-        }
-
         .section.full-width {
             grid-column: 1 / -1;
         }
 
         .section h2 {
-            color: #667eea;
+            color: var(--accent);
             font-size: 1.5em;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #f093fb;
+            border-bottom: 2px solid rgba(0, 191, 255, 0.3);
             display: flex;
             align-items: center;
             gap: 10px;
+            position: relative;
+            z-index: 1;
         }
 
-        .section h2::before {
-            content: '●';
-            color: #764ba2;
+        .section h2 i {
+            color: var(--glow);
+            text-shadow: 0 0 10px rgba(186, 85, 211, 0.7);
         }
 
         .experience-item, .education-item {
             margin-bottom: 20px;
-            padding: 15px;
-            background: white;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
         .experience-item:hover, .education-item:hover {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
-            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .experience-item h3, .education-item h3 {
-            color: #764ba2;
+            color: var(--accent);
             font-size: 1.1em;
             margin-bottom: 5px;
         }
 
         .date {
-            color: #667eea;
+            color: var(--glow);
             font-size: 0.9em;
             font-style: italic;
             margin-bottom: 10px;
@@ -273,7 +418,7 @@
 
         .experience-item li, .education-item li {
             margin-bottom: 8px;
-            color: #555;
+            color: #E6E6FA;
             line-height: 1.6;
         }
 
@@ -284,18 +429,22 @@
         }
 
         .skill-item {
-            background: white;
-            padding: 12px;
-            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 12px;
             text-align: center;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             cursor: pointer;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
         .skill-item:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            transform: scale(1.05);
+            background: rgba(138, 43, 226, 0.3);
+            transform: scale(1.1) rotate(3deg);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
         .languages-list {
@@ -305,17 +454,18 @@
         }
 
         .language-badge {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 25px;
             font-weight: bold;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
         }
 
         .language-badge:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.6);
         }
 
         .references-grid {
@@ -324,52 +474,88 @@
         }
 
         .reference-item {
-            background: white;
-            padding: 15px;
-            border-radius: 10px;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
         }
 
         .reference-item:hover {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
-            transform: translateX(5px);
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(10px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
         }
 
         .reference-item h3 {
-            color: #764ba2;
+            color: var(--accent);
             margin-bottom: 5px;
         }
 
         .reference-item p {
-            color: #667eea;
+            color: #E6E6FA;
             font-size: 0.95em;
         }
 
         .profile-section {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
-            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
             border-radius: 15px;
             line-height: 1.8;
-            color: #555;
+            color: #E6E6FA;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-section p {
+            margin-bottom: 15px;
+        }
+
+        .profile-section strong {
+            color: var(--accent);
         }
 
         .project-link {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
             color: white;
             padding: 12px 25px;
             border-radius: 25px;
             text-decoration: none;
             font-weight: bold;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             margin-top: 10px;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+
+        .project-link::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.7s ease;
+        }
+
+        .project-link:hover::before {
+            left: 100%;
         }
 
         .project-link:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.6);
         }
 
         @media (max-width: 1024px) {
@@ -399,6 +585,11 @@
 
             .content {
                 padding: 20px;
+                gap: 20px;
+            }
+
+            .section.full-width, .section {
+                padding: 25px 20px;
             }
 
             .contact-info {
@@ -429,6 +620,10 @@
                 width: 100px;
                 height: 100px;
             }
+            
+            .section.full-width, .section {
+                padding: 20px 15px;
+            }
         }
     </style>
 </head>
@@ -441,14 +636,20 @@
                 </div>
                 <div class="header-info">
                     <h1>Mario Eliseo Sandoval Platero</h1>
-                    <div class="subtitle">Profesional en Informática | Tratamiento de datos| Diseñador Gráfico</div>
+                    <div class="subtitle">Profesional en Informática | Tratamiento de datos | Diseñador Gráfico</div>
                     <div class="contact-info">
-                        <div class="contact-item">📍 Santa Ana, El Salvador</div>
-                        <div class="contact-item">📱 6003-5661</div>
-                        <div class="contact-item">✉️ sandovalplateromarioeliseo@gmail.com</div>
+                        <div class="contact-item">
+                            <i class="fas fa-map-marker-alt"></i> Santa Ana, El Salvador
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-phone"></i> 6003-5661
+                        </div>
+                        <div class="contact-item">
+                            <i class="fas fa-envelope"></i> sandovalplateromarioeliseo@gmail.com
+                        </div>
                     </div>
                     <a href="certificados.html" class="certificates-btn">
-                        🏆 Ver Certificados y Diplomas
+                        <i class="fas fa-certificate"></i> Ver Certificados y Diplomas
                     </a>
                 </div>
                 <div class="qr-container">
@@ -460,18 +661,18 @@
 
         <div class="content">
             <div class="section full-width">
-                <h2>Perfil Profesional</h2>
+                <h2><i class="fas fa-user"></i> Perfil Profesional</h2>
                 <div class="profile-section">
                     <p><strong>Fecha de nacimiento:</strong> 18 de Febrero de 2001</p>
-                    <p style="margin-top: 15px;">Profesional en informática y en cómputo en la nube con especialidad en tratamiento de datos y certificado en diseño gráfico. Experiencia en soporte técnico y en proyectos de soluciones tecnológicas y multimedia con identidad visual.</p>
+                    <p>Profesional en informática y en cómputo en la nube con especialidad en tratamiento de datos y certificado en diseño gráfico. Experiencia en soporte técnico y en proyectos de soluciones tecnológicas y multimedia con identidad visual.</p>
                 </div>
             </div>
 
             <div class="section full-width">
-                <h2>Experiencia Laboral</h2>
+                <h2><i class="fas fa-briefcase"></i> Experiencia Laboral</h2>
                 <div class="experience-item">
                     <h3>Crece Centroamérica S.A. de C.V.</h3>
-                    <div class="date">Julio 2024 – Diciembre 2024</div>
+                    <div class="date">Julio 2024 ? Diciembre 2024</div>
                     <ul>
                         <li>Atención y asesoría tecnológica a clientes</li>
                         <li>Manejo de sistemas internos para gestión de ventas</li>
@@ -480,18 +681,20 @@
                 </div>
                 <div class="experience-item">
                     <h3>Proyectos para Pequeños Negocios</h3>
-                    <div class="date">Enero 2025 – Septiembre 2025</div>
+                    <div class="date">Enero 2025 ? Septiembre 2025</div>
                     <ul>
                         <li>Desarrollo de sistemas de facturación e inventarios</li>
                         <li>Implementación de chatbots y soluciones ligeras en la nube</li>
                         <li>Creación de contenido multimedia y diseño de identidad visual</li>
                     </ul>
-                    <a href="https://vermillion-brioche-98436e.netlify.app/" target="_blank" class="project-link">🚀 Ver Proyectos Destacados</a>
+                    <a href="https://vermillion-brioche-98436e.netlify.app/" target="_blank" class="project-link">
+                        <i class="fas fa-rocket"></i> Ver Proyectos Destacados
+                    </a>
                 </div>
             </div>
 
             <div class="section">
-                <h2>Habilidades</h2>
+                <h2><i class="fas fa-star"></i> Habilidades</h2>
                 <div class="skills-grid">
                     <div class="skill-item">Trabajo en equipo</div>
                     <div class="skill-item">Creatividad</div>
@@ -503,7 +706,7 @@
             </div>
 
             <div class="section">
-                <h2>Software</h2>
+                <h2><i class="fas fa-desktop"></i> Software</h2>
                 <div class="skills-grid">
                     <div class="skill-item">Linux</div>
                     <div class="skill-item">Windows</div>
@@ -515,11 +718,12 @@
                     <div class="skill-item">Audacity</div>
                     <div class="skill-item">Ollama IA</div>
                     <div class="skill-item">Pack Office</div>
+                    <div class="skill-item">Illustrator</div>
                 </div>
             </div>
 
             <div class="section">
-                <h2>Lenguajes de Programación</h2>
+                <h2><i class="fas fa-code"></i> Lenguajes de Programación</h2>
                 <div class="skills-grid">
                     <div class="skill-item">Python</div>
                     <div class="skill-item">C#</div>
@@ -531,7 +735,7 @@
             </div>
 
             <div class="section">
-                <h2>Frameworks</h2>
+                <h2><i class="fas fa-cogs"></i> Frameworks</h2>
                 <div class="skills-grid">
                     <div class="skill-item">Angular</div>
                     <div class="skill-item">Django</div>
@@ -540,7 +744,7 @@
             </div>
 
             <div class="section">
-                <h2>Idiomas</h2>
+                <h2><i class="fas fa-language"></i> Idiomas</h2>
                 <div class="languages-list">
                     <div class="language-badge">Español - Nativo</div>
                     <div class="language-badge">Inglés - Básico/Intermedio</div>
@@ -548,7 +752,7 @@
             </div>
 
             <div class="section full-width">
-                <h2>Formación Académica</h2>
+                <h2><i class="fas fa-graduation-cap"></i> Formación Académica</h2>
                 <div class="education-item">
                     <h3>Colegio La Esperanza</h3>
                     <div class="date">Bachillerato General</div>
@@ -577,17 +781,17 @@
             </div>
 
             <div class="section full-width">
-                <h2>Referencias</h2>
+                <h2><i class="fas fa-users"></i> Referencias</h2>
                 <div class="references-grid">
                     <div class="reference-item">
                         <h3>María Rodríguez</h3>
                         <p>Supervisora en Crece</p>
-                        <p>📱 7812-5391</p>
+                        <p><i class="fas fa-phone"></i> 7812-5391</p>
                     </div>
                     <div class="reference-item">
                         <h3>José Hernández</h3>
                         <p>Sistema de ventas y facturación</p>
-                        <p>📱 7267-4479</p>
+                        <p><i class="fas fa-phone"></i> 7267-4479</p>
                     </div>
                 </div>
             </div>
@@ -623,6 +827,25 @@
                     item.style.animation = '';
                 }, 500);
             });
+        });
+
+        // Efecto de partículas para el fondo
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.container');
+            for (let i = 0; i < 20; i++) {
+                const particle = document.createElement('div');
+                particle.style.position = 'absolute';
+                particle.style.width = Math.random() * 5 + 2 + 'px';
+                particle.style.height = particle.style.width;
+                particle.style.background = `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, 255, ${Math.random() * 0.5 + 0.2})`;
+                particle.style.borderRadius = '50%';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.pointerEvents = 'none';
+                particle.style.zIndex = '0';
+                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
+                container.appendChild(particle);
+            }
         });
     </script>
 </body>
