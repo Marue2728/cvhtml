@@ -42,16 +42,6 @@
                 radial-gradient(circle at 80% 20%, rgba(75, 0, 130, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 40% 40%, rgba(0, 191, 255, 0.1) 0%, transparent 50%);
             z-index: -1;
-            animation: backgroundShift 15s ease-in-out infinite alternate;
-        }
-
-        @keyframes backgroundShift {
-            0% {
-                transform: scale(1) rotate(0deg);
-            }
-            100% {
-                transform: scale(1.1) rotate(1deg);
-            }
         }
 
         .container {
@@ -65,20 +55,6 @@
                 inset 0 0 30px rgba(0, 191, 255, 0.1);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(138, 43, 226, 0.3);
-            animation: containerGlow 4s ease-in-out infinite alternate;
-        }
-
-        @keyframes containerGlow {
-            0% {
-                box-shadow: 
-                    0 0 30px rgba(138, 43, 226, 0.5),
-                    inset 0 0 30px rgba(0, 191, 255, 0.1);
-            }
-            100% {
-                box-shadow: 
-                    0 0 40px rgba(138, 43, 226, 0.7),
-                    inset 0 0 40px rgba(0, 191, 255, 0.2);
-            }
         }
 
         .header {
@@ -89,17 +65,6 @@
             overflow: hidden;
         }
 
-        .header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-            animation: pulse 6s ease-in-out infinite;
-        }
-
         .header::after {
             content: '';
             position: absolute;
@@ -108,17 +73,6 @@
             width: 100%;
             height: 5px;
             background: linear-gradient(90deg, transparent, var(--accent), transparent);
-            animation: shimmer 3s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); opacity: 0.5; }
-            50% { transform: scale(1.1); opacity: 0.8; }
-        }
-
-        @keyframes shimmer {
-            0% { transform: translateX(-100%); }
-            100% { transform: translateX(100%); }
         }
 
         .header-content {
@@ -141,26 +95,9 @@
             position: relative;
         }
 
-        .photo-container::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.3), rgba(0, 191, 255, 0.3));
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            z-index: 1;
-        }
-
         .photo-container:hover {
-            transform: scale(1.05) rotate(2deg);
+            transform: scale(1.05);
             box-shadow: 0 15px 40px rgba(138, 43, 226, 0.7);
-        }
-
-        .photo-container:hover::before {
-            opacity: 1;
         }
 
         .photo-container img {
@@ -182,12 +119,6 @@
             background-clip: text;
             color: transparent;
             background-size: 200% auto;
-            animation: textShine 3s ease-in-out infinite alternate;
-        }
-
-        @keyframes textShine {
-            0% { background-position: 0% center; }
-            100% { background-position: 200% center; }
         }
 
         .header-info .subtitle {
@@ -214,7 +145,7 @@
         }
 
         .qr-container:hover {
-            transform: scale(1.05) rotate(5deg);
+            transform: scale(1.05);
             box-shadow: 0 15px 40px rgba(138, 43, 226, 0.7);
         }
 
@@ -277,21 +208,6 @@
             overflow: hidden;
         }
 
-        .certificates-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.7s ease;
-        }
-
-        .certificates-btn:hover::before {
-            left: 100%;
-        }
-
         .certificates-btn:hover {
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.3);
@@ -311,45 +227,27 @@
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            animation: slideIn 0.5s ease-out backwards;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(138, 43, 226, 0.3);
-        }
-
-        .section::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1) 0%, rgba(0, 191, 255, 0.1) 100%);
             opacity: 0;
-            transition: opacity 0.5s ease;
+            transform: translateY(30px);
+            animation: fadeInUp 0.5s ease-out forwards;
         }
 
-        .section:hover::before {
-            opacity: 1;
-        }
-
-        .section:hover {
-            transform: translateY(-10px) scale(1.02);
-            box-shadow: 
-                0 20px 40px rgba(138, 43, 226, 0.4),
-                inset 0 0 30px rgba(0, 191, 255, 0.1);
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
+        @keyframes fadeInUp {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
+        }
+
+        .section:hover {
+            transform: translateY(-10px);
+            box-shadow: 
+                0 20px 40px rgba(138, 43, 226, 0.4),
+                inset 0 0 30px rgba(0, 191, 255, 0.1);
         }
 
         .section:nth-child(1) { animation-delay: 0.1s; }
@@ -443,7 +341,7 @@
 
         .skill-item:hover {
             background: rgba(138, 43, 226, 0.3);
-            transform: scale(1.1) rotate(3deg);
+            transform: scale(1.1);
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
         }
 
@@ -536,21 +434,6 @@
             position: relative;
             z-index: 1;
             overflow: hidden;
-        }
-
-        .project-link::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-            transition: left 0.7s ease;
-        }
-
-        .project-link:hover::before {
-            left: 100%;
         }
 
         .project-link:hover {
@@ -672,7 +555,7 @@
                 <h2><i class="fas fa-briefcase"></i> Experiencia Laboral</h2>
                 <div class="experience-item">
                     <h3>Crece Centroamérica S.A. de C.V.</h3>
-                    <div class="date">Julio 2024 ? Diciembre 2024</div>
+                    <div class="date">Julio 2024 / Diciembre 2024</div>
                     <ul>
                         <li>Atención y asesoría tecnológica a clientes</li>
                         <li>Manejo de sistemas internos para gestión de ventas</li>
@@ -681,7 +564,7 @@
                 </div>
                 <div class="experience-item">
                     <h3>Proyectos para Pequeños Negocios</h3>
-                    <div class="date">Enero 2025 ? Septiembre 2025</div>
+                    <div class="date">Enero 2025 / Septiembre 2025</div>
                     <ul>
                         <li>Desarrollo de sistemas de facturación e inventarios</li>
                         <li>Implementación de chatbots y soluciones ligeras en la nube</li>
@@ -799,54 +682,41 @@
     </div>
 
     <script>
-        const sections = document.querySelectorAll('.section');
-        
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        sections.forEach(section => {
-            observer.observe(section);
-        });
-
-        const skillItems = document.querySelectorAll('.skill-item');
-        skillItems.forEach(item => {
-            item.addEventListener('click', () => {
-                item.style.animation = 'pulse 0.5s ease';
-                setTimeout(() => {
-                    item.style.animation = '';
-                }, 500);
-            });
-        });
-
-        // Efecto de partículas para el fondo
+        // Script simplificado para mejorar el rendimiento
         document.addEventListener('DOMContentLoaded', function() {
-            const container = document.querySelector('.container');
-            for (let i = 0; i < 20; i++) {
-                const particle = document.createElement('div');
-                particle.style.position = 'absolute';
-                particle.style.width = Math.random() * 5 + 2 + 'px';
-                particle.style.height = particle.style.width;
-                particle.style.background = `rgba(${Math.random() * 100 + 155}, ${Math.random() * 100 + 155}, 255, ${Math.random() * 0.5 + 0.2})`;
-                particle.style.borderRadius = '50%';
-                particle.style.left = Math.random() * 100 + '%';
-                particle.style.top = Math.random() * 100 + '%';
-                particle.style.pointerEvents = 'none';
-                particle.style.zIndex = '0';
-                particle.style.animation = `float ${Math.random() * 10 + 10}s linear infinite`;
-                container.appendChild(particle);
-            }
+            // Animación de aparición para las secciones
+            const sections = document.querySelectorAll('.section');
+            
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Efecto simple para los elementos de habilidades
+            const skillItems = document.querySelectorAll('.skill-item');
+            skillItems.forEach(item => {
+                item.addEventListener('click', () => {
+                    item.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        item.style.transform = '';
+                    }, 200);
+                });
+            });
         });
     </script>
 </body>
+</html>
 </html>
