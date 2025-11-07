@@ -114,11 +114,20 @@
             font-size: 2.5em;
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            background: linear-gradient(90deg, #fff, var(--accent), #fff);
+            background: linear-gradient(90deg, #fff, var(--accent), #BA55D3, #fff);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            background-size: 200% auto;
+            background-size: 300% auto;
+            animation: textShine 6s ease-in-out infinite;
+        }
+
+        @keyframes textShine {
+            0% { background-position: 0% center; }
+            25% { background-position: 50% center; }
+            50% { background-position: 100% center; }
+            75% { background-position: 150% center; }
+            100% { background-position: 200% center; }
         }
 
         .header-info .subtitle {
@@ -682,9 +691,7 @@
     </div>
 
     <script>
-        // Script simplificado para mejorar el rendimiento
         document.addEventListener('DOMContentLoaded', function() {
-            // Animación de aparición para las secciones
             const sections = document.querySelectorAll('.section');
             
             const observerOptions = {
@@ -705,7 +712,6 @@
                 observer.observe(section);
             });
 
-            // Efecto simple para los elementos de habilidades
             const skillItems = document.querySelectorAll('.skill-item');
             skillItems.forEach(item => {
                 item.addEventListener('click', () => {
@@ -719,4 +725,5 @@
     </script>
 </body>
 </html>
+</body>
 </html>
