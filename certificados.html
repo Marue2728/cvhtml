@@ -12,16 +12,39 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            font-family: 'Courier New', monospace;
+            background: linear-gradient(135deg, #0a0e27 0%, #1a1a2e 50%, #16213e 100%);
             min-height: 100vh;
             padding: 20px;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                repeating-linear-gradient(
+                    0deg,
+                    transparent,
+                    transparent 2px,
+                    rgba(0, 255, 255, 0.03) 2px,
+                    rgba(0, 255, 255, 0.03) 4px
+                );
+            pointer-events: none;
+            z-index: 1;
         }
 
         .container {
             max-width: 1400px;
             margin: 0 auto;
             animation: fadeIn 0.8s ease-in;
+            position: relative;
+            z-index: 2;
         }
 
         @keyframes fadeIn {
@@ -37,15 +60,16 @@
 
         .header {
             text-align: center;
-            color: white;
+            color: #00ffff;
             margin-bottom: 40px;
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff, 0 0 30px #00ffff;
         }
 
         .header h1 {
             font-size: 3em;
             margin-bottom: 15px;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
             animation: slideDown 0.6s ease-out;
+            letter-spacing: 3px;
         }
 
         @keyframes slideDown {
@@ -62,36 +86,42 @@
         .header p {
             font-size: 1.2em;
             opacity: 0.95;
+            color: #ff00ff;
+            text-shadow: 0 0 10px #ff00ff;
         }
 
         .back-btn {
             display: inline-flex;
             align-items: center;
             gap: 10px;
-            background: white;
-            color: #667eea;
+            background: linear-gradient(135deg, #00ffff 0%, #ff00ff 100%);
+            color: #0a0e27;
             padding: 12px 25px;
-            border-radius: 30px;
+            border-radius: 5px;
             text-decoration: none;
             font-weight: bold;
             transition: all 0.3s ease;
             margin-bottom: 30px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            border: 2px solid #00ffff;
         }
 
         .back-btn:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            box-shadow: 0 0 30px rgba(255, 0, 255, 0.8), 0 0 40px rgba(0, 255, 255, 0.6);
+            background: linear-gradient(135deg, #ff00ff 0%, #00ffff 100%);
             color: white;
         }
 
         .section-title {
-            color: white;
+            color: #00ffff;
             font-size: 2em;
             margin: 40px 0 25px 0;
             text-align: center;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 0 0 10px #00ffff, 0 0 20px #00ffff;
+            letter-spacing: 2px;
+            border-bottom: 2px solid #00ffff;
+            padding-bottom: 10px;
         }
 
         .gallery {
@@ -102,19 +132,40 @@
         }
 
         .gallery-item {
-            background: white;
-            border-radius: 15px;
+            background: rgba(26, 26, 46, 0.8);
+            border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
             transition: all 0.4s ease;
             cursor: pointer;
             animation: scaleIn 0.5s ease-out backwards;
+            border: 2px solid #00ffff;
+            position: relative;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.4), transparent);
+            transition: left 0.5s;
+        }
+
+        .gallery-item:hover::before {
+            left: 100%;
         }
 
         .gallery-item:nth-child(1) { animation-delay: 0.1s; }
         .gallery-item:nth-child(2) { animation-delay: 0.2s; }
         .gallery-item:nth-child(3) { animation-delay: 0.3s; }
         .gallery-item:nth-child(4) { animation-delay: 0.4s; }
+        .gallery-item:nth-child(5) { animation-delay: 0.5s; }
+        .gallery-item:nth-child(6) { animation-delay: 0.6s; }
+        .gallery-item:nth-child(7) { animation-delay: 0.7s; }
+        .gallery-item:nth-child(8) { animation-delay: 0.8s; }
 
         @keyframes scaleIn {
             from {
@@ -129,7 +180,8 @@
 
         .gallery-item:hover {
             transform: translateY(-10px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.6), 0 0 60px rgba(255, 0, 255, 0.4);
+            border-color: #ff00ff;
         }
 
         .gallery-item img {
@@ -137,26 +189,31 @@
             height: auto;
             display: block;
             transition: transform 0.3s ease;
+            filter: brightness(0.9);
         }
 
         .gallery-item:hover img {
             transform: scale(1.05);
+            filter: brightness(1.1);
         }
 
         .gallery-item-info {
             padding: 20px;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%);
+            background: rgba(0, 0, 0, 0.6);
+            border-top: 2px solid #00ffff;
         }
 
         .gallery-item-info h3 {
-            color: #667eea;
+            color: #00ffff;
             font-size: 1.2em;
             margin-bottom: 8px;
+            text-shadow: 0 0 5px #00ffff;
         }
 
         .gallery-item-info p {
-            color: #764ba2;
+            color: #ff00ff;
             font-size: 0.95em;
+            text-shadow: 0 0 5px #ff00ff;
         }
 
         /* Modal para ver imagen en grande */
@@ -168,7 +225,7 @@
             top: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.95);
+            background: rgba(10, 14, 39, 0.98);
             animation: fadeIn 0.3s ease;
         }
 
@@ -184,7 +241,8 @@
             object-fit: contain;
             animation: zoomIn 0.3s ease;
             border-radius: 10px;
-            box-shadow: 0 0 50px rgba(102, 126, 234, 0.5);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.7), 0 0 100px rgba(255, 0, 255, 0.5);
+            border: 3px solid #00ffff;
         }
 
         @keyframes zoomIn {
@@ -202,37 +260,43 @@
             position: absolute;
             top: 30px;
             right: 50px;
-            color: white;
+            color: #00ffff;
             font-size: 50px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
             z-index: 1001;
+            text-shadow: 0 0 10px #00ffff;
         }
 
         .close-modal:hover {
-            color: #f093fb;
+            color: #ff00ff;
             transform: rotate(90deg);
+            text-shadow: 0 0 20px #ff00ff;
         }
 
         .modal-nav {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border: none;
+            background: rgba(0, 255, 255, 0.2);
+            color: #00ffff;
+            border: 2px solid #00ffff;
             font-size: 40px;
             padding: 20px 30px;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-radius: 10px;
+            border-radius: 5px;
             backdrop-filter: blur(10px);
+            text-shadow: 0 0 10px #00ffff;
         }
 
         .modal-nav:hover {
-            background: rgba(102, 126, 234, 0.8);
+            background: rgba(255, 0, 255, 0.4);
+            border-color: #ff00ff;
+            color: #ff00ff;
             transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 0 20px rgba(255, 0, 255, 0.8);
         }
 
         .modal-prev {
@@ -248,12 +312,19 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
+            background: rgba(10, 14, 39, 0.9);
+            color: #00ffff;
             padding: 15px 30px;
-            border-radius: 30px;
+            border-radius: 5px;
             backdrop-filter: blur(10px);
             text-align: center;
+            border: 2px solid #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+
+        .modal-info strong {
+            color: #ff00ff;
+            text-shadow: 0 0 5px #ff00ff;
         }
 
         @media (max-width: 768px) {
@@ -294,39 +365,67 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>🏆 Certificados y Diplomas</h1>
-            <p>Mario Eliseo Sandoval Platero</p>
+            <h1> CERTIFICADOS Y DIPLOMAS</h1>
+            <p>MARIO ELISEO SANDOVAL PLATERO</p>
         </div>
 
         <a href="index.html" class="back-btn">
-            ← Volver al CV
+            ← VOLVER AL CV
         </a>
 
-        <h2 class="section-title">📜 Certificados</h2>
+        <h2 class="section-title">📜 CERTIFICADOS</h2>
         <div class="gallery" id="certificados-gallery">
             <div class="gallery-item" data-index="0">
-                <img src="images/certificado1.jpg" alt="Certificado 1">
+                <img src="images/certificado1-1.png" alt="Certificado Programador">
+                <div class="gallery-item-info">
+                    <h3>Programador (Orientado a Objetos)</h3>
+                    <p>Fundación Carlos Slim</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-index="1">
+                <img src="images/certificado2-1.png" alt="Certificado Big Data">
+                <div class="gallery-item-info">
+                    <h3>Técnico en Big Data</h3>
+                    <p>Fundación Carlos Slim</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-index="2">
+                <img src="images/certificado2-2.png" alt="Certificado Inteligencia de Negocios">
+                <div class="gallery-item-info">
+                    <h3>Técnico en Inteligencia de Negocios</h3>
+                    <p>Fundación Carlos Slim</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-index="3">
+                <img src="images/certificado1.jpg" alt="Certificado Informática">
                 <div class="gallery-item-info">
                     <h3>Técnico en Informática</h3>
                     <p>Fundación Carlos Slim - Ofimática</p>
                 </div>
             </div>
-            <div class="gallery-item" data-index="1">
-                <img src="images/certificado2.jpg" alt="Certificado 2">
+            <div class="gallery-item" data-index="4">
+                <img src="images/certificado2.jpg" alt="Certificado Cómputo en la Nube">
                 <div class="gallery-item-info">
                     <h3>Técnico en Cómputo en la Nube</h3>
                     <p>Fundación Carlos Slim</p>
                 </div>
             </div>
-            <div class="gallery-item" data-index="2">
-                <img src="images/certificado3.jpg" alt="Certificado 3">
+            <div class="gallery-item" data-index="5">
+                <img src="images/certificado3.jpg" alt="Certificado Tratamiento de Datos">
                 <div class="gallery-item-info">
                     <h3>Especialidad en Tratamiento de Datos</h3>
                     <p>Fundación Carlos Slim</p>
                 </div>
             </div>
-            <div class="gallery-item" data-index="3">
-                <img src="images/certificado4.jpg" alt="Certificado 4">
+            <div class="gallery-item" data-index="6">
+                <img src="images/certificado5.png" alt="Certificado Claude Code">
+                <div class="gallery-item-info">
+                    <h3>Claude Code in Action</h3>
+                    <p>Anthropic</p>
+                </div>
+            </div>
+            <div class="gallery-item" data-index="7">
+                <img src="images/certificado4.jpg" alt="Certificado Diseño Gráfico">
                 <div class="gallery-item-info">
                     <h3>Diseño Gráfico</h3>
                     <p>Creati</p>
@@ -334,17 +433,17 @@
             </div>
         </div>
 
-        <h2 class="section-title">🎓 Diplomas</h2>
+        <h2 class="section-title">🎓 DIPLOMAS</h2>
         <div class="gallery" id="diplomas-gallery">
-            <div class="gallery-item" data-index="4">
-                <img src="images/diploma1.jpg" alt="Diploma 1">
+            <div class="gallery-item" data-index="8">
+                <img src="images/diploma1.jpg" alt="Diploma Estudiante Destacado">
                 <div class="gallery-item-info">
                     <h3>Estudiante Destacado</h3>
                     <p>U.M.A. - Contenidos Multimedia</p>
                 </div>
             </div>
-            <div class="gallery-item" data-index="5">
-                <img src="images/diploma2.jpg" alt="Diploma 2">
+            <div class="gallery-item" data-index="9">
+                <img src="images/diploma2.jpg" alt="Diploma Bachillerato">
                 <div class="gallery-item-info">
                     <h3>Bachillerato General</h3>
                     <p>Colegio La Esperanza</p>
