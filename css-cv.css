@@ -533,3 +533,8 @@ body::before {
     overflow-x: hidden;
     overflow-y: visible; /* o auto, según prefieras */
 }
+.skill-item {
+    word-break: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto; /* Opcional, para partir con guiones si el navegador lo soporta */
+}
