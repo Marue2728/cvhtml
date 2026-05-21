@@ -509,3 +509,27 @@ body::before {
         padding: 20px 15px;
     }
 }
+
+/* 1. Permitir que el texto largo se parta en cualquier punto */
+.contact-item,
+.header-info .subtitle,
+.project-link,
+.certificates-btn {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* 2. Evitar que los elementos flexibles fuercen el ancho del contenedor padre */
+.contact-info {
+    min-width: 0;
+}
+.contact-item {
+    min-width: 0;
+}
+
+/* 3. Cambiar el overflow del contenedor principal para que solo oculte el desbordamiento horizontal,
+   pero permita que el contenido vertical fluya sin ser cortado */
+.container {
+    overflow-x: hidden;
+    overflow-y: visible; /* o auto, según prefieras */
+}
